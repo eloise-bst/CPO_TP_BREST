@@ -10,8 +10,13 @@ package miniprojet_cadenas_brest;
  */
 public class Cadenas {
     
-    private final int[] longueurCode = new int[4];
+    private final int[] codeSecret = new int[4];
     private final int maxTentatives = 5;
-    private int nbDeTentativesActuelles = 0;
-
+    private int tentativeActuelle = 0;
+    
+    private int nbExacts = 0; 
+    private int nbTropHauts = 0; 
+    private int nbTropBas = 0; 
+    private boolean partieGagnee = false;
+   
 }
