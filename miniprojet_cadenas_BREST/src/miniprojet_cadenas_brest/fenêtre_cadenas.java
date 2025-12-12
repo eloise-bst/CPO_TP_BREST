@@ -14,9 +14,6 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
     
     private Cadenas jeu;
     private int[] propositionActuelle = {0, 0, 0, 0};
-    /**
-     * Creates new form fenêtre_cadenas
-     */
 
     public fenêtre_cadenas() {
         initComponents();
