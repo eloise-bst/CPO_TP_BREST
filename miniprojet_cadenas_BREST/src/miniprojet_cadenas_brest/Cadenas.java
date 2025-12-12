@@ -63,4 +63,29 @@ public class Cadenas {
         return partieGagnee || tentativeActuelle >= maxTentatives; 
     }
     
+    public void soumettreProposition(int[] proposition) {
+    if (estPartieTerminee()) {
+        return; 
+    }
+
+    tentativeActuelle++; 
+    nbExacts = 0;
+    nbTropHauts = 0;
+    nbTropBas = 0;
+    
+    for (int i = 0; i < 4; i++) {
+        if (proposition[i] == codeSecret[i]) {
+            nbExacts++;
+        } else if (proposition[i] > codeSecret[i]) {
+            nbTropHauts++;
+        } else {
+            nbTropBas++;
+        }
+    }
+    
+    if (nbExacts == 4) {
+        partieGagnee = true;
+    }
+}
+    
 }
