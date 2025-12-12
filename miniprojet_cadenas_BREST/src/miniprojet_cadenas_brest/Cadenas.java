@@ -19,6 +19,10 @@ public class Cadenas {
     private int nbTropBas = 0; 
     private boolean partieGagnee = false;
     
+    public Cadenas() {
+        genererCodeSecret();
+    }
+    
     public void genererCodeSecret() {
     tentativeActuelle = 0; 
     nbExacts = 0;
@@ -29,6 +33,34 @@ public class Cadenas {
     java.util.Random rand = new java.util.Random();
     for (int i = 0; i < 4; i++) {
         codeSecret[i] = rand.nextInt(10); 
+    }   
+}
+    public int getTentativeActuelle() { 
+        return tentativeActuelle; 
     }
-   
+
+    public int getNbMaxTentatives() { 
+        return maxTentatives; 
+    }
+
+    public int getDernierNbExacts() { 
+        return nbExacts; 
+    }
+
+    public int getDernierNbTropHauts() { 
+        return nbTropHauts; 
+    }
+
+    public int getDernierNbTropBas() { 
+        return nbTropBas; 
+    }
+
+    public boolean estPartieGagnee() { 
+        return partieGagnee; 
+    }
+
+    public boolean estPartieTerminee() { 
+        return partieGagnee || tentativeActuelle >= maxTentatives; 
+    }
+    
 }
