@@ -35,23 +35,23 @@ public class Cadenas {
         codeSecret[i] = rand.nextInt(10); 
     }   
 }
-    public int getTentativeActuelle() { 
+    public int gettentativeActuelle() { 
         return tentativeActuelle; 
     }
 
-    public int getNbMaxTentatives() { 
+    public int getmaxTentatives() { 
         return maxTentatives; 
     }
 
-    public int getDernierNbExacts() { 
+    public int getnbExacts() { 
         return nbExacts; 
     }
 
-    public int getDernierNbTropHauts() { 
+    public int getnbTropHauts() { 
         return nbTropHauts; 
     }
 
-    public int getDernierNbTropBas() { 
+    public int getnbTropBas() { 
         return nbTropBas; 
     }
 
@@ -92,25 +92,6 @@ public class Cadenas {
         return String.format("%d%d%d%d", codeSecret[0], codeSecret[1], codeSecret[2], codeSecret[3]);
     }
 
-    Object getnbExacts() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    Object getnbTropHauts() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    Object getnbTropBas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    String gettentativeActuelle() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    String getmaxTentatives() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     }
     
 
