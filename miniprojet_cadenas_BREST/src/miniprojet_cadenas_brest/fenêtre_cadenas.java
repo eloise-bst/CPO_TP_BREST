@@ -11,12 +11,48 @@ package miniprojet_cadenas_brest;
 public class fenêtre_cadenas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(fenêtre_cadenas.class.getName());
-
+    
+    private Cadenas jeu;
+    private int[] propositionActuelle = {0, 0, 0, 0};
     /**
      * Creates new form fenêtre_cadenas
      */
+
+    private void modifierProposition(int index, int delta) {
+        if (jeu == null) return;
+        if (jeu.estPartieTerminee()) return;
+
+        propositionActuelle[index] = (propositionActuelle[index] + delta + 10) % 10;
+        mettreAJourAffichage();
+    }
+
+    private void mettreAJourAffichage() {
+        // afficher la proposition courante
+        texte_chiffre_1.setText(String.valueOf(propositionActuelle[0]));
+        texte_chiffre_2.setText(String.valueOf(propositionActuelle[1]));
+        texte_chiffre_3.setText(String.valueOf(propositionActuelle[2]));
+        texte_chiffre_4.setText(String.valueOf(propositionActuelle[3]));
+
+        // afficher les résultats du dernier essai (défensif : vérifie jeu != null)
+        if (jeu != null) {
+            texte_nb_chiffres_exacts.setText(String.valueOf(jeu.getnbExacts()));
+            texte_nb_chiffres_hauts.setText(String.valueOf(jeu.getnbTropHauts()));
+            texte_nb_chiffres_bas.setText(String.valueOf(jeu.getnbTropBas()));
+            texte_score.setText(jeu.gettentativeActuelle() + " sur " + jeu.getmaxTentatives());
+            bouton_tester.setEnabled(!jeu.estPartieTerminee());
+        } else {
+            texte_nb_chiffres_exacts.setText("0");
+            texte_nb_chiffres_hauts.setText("0");
+            texte_nb_chiffres_bas.setText("0");
+            texte_score.setText("0");
+            bouton_tester.setEnabled(false);
+        }
+    }
+    
     public fenêtre_cadenas() {
         initComponents();
+        jeu = new Cadenas();
+        mettreAJourAffichage();
     }
 
     /**
@@ -52,6 +88,7 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
         texte_tentative = new javax.swing.JLabel();
         texte_score = new javax.swing.JLabel();
         texte_recommencer = new javax.swing.JButton();
+        affichage_resultat = new javax.swing.JLabel();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -122,6 +159,8 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
 
                         texte_recommencer.setText("Recommencer");
 
+                        affichage_resultat.setText("jLabel1");
+
                         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                         getContentPane().setLayout(layout);
                         layout.setHorizontalGroup(
@@ -153,7 +192,7 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
                                                             .addComponent(texte_nb_chiffres_exacts)
                                                             .addComponent(bouton_tester, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                 .addGap(151, 151, 151)
-                                                .addComponent(texte_score, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE))
+                                                .addComponent(texte_score, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(layout.createSequentialGroup()
@@ -167,17 +206,19 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
                                                         .addGap(18, 18, 18)
                                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                             .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(down_chiffre_3)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(down_chiffre_4))
+                                                            .addGroup(layout.createSequentialGroup()
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                     .addComponent(up_chiffre_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                                     .addComponent(texte_chiffre_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                                     .addComponent(up_chiffre_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                    .addComponent(texte_chiffre_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                                            .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(down_chiffre_3)
-                                                                .addGap(18, 18, 18)
-                                                                .addComponent(down_chiffre_4))))
+                                                                    .addComponent(texte_chiffre_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                .addGap(74, 74, 74)
+                                                                .addComponent(affichage_resultat))))
                                                     .addGroup(layout.createSequentialGroup()
                                                         .addComponent(down_chiffre_1)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -186,7 +227,7 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
                                                         .addComponent(texte_lbl_nb_chiffres_hauts)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(texte_nb_chiffres_hauts)))
-                                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                                .addGap(0, 55, Short.MAX_VALUE)))))
                                 .addGap(24, 24, 24))
                         );
                         layout.setVerticalGroup(
@@ -200,13 +241,18 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
                                     .addComponent(up_chiffre_2)
                                     .addComponent(up_chiffre_3)
                                     .addComponent(up_chiffre_4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(texte_chiffre_2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                        .addComponent(texte_chiffre_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(texte_chiffre_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(texte_chiffre_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(texte_chiffre_2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                                .addComponent(texte_chiffre_1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(texte_chiffre_3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(texte_chiffre_4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addComponent(affichage_resultat)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(down_chiffre_1)
@@ -238,7 +284,7 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
                                             .addComponent(texte_nb_chiffres_bas))
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                         .addComponent(texte_recommencer)
                                         .addGap(14, 14, 14))))
                         );
@@ -247,21 +293,76 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
                     }// </editor-fold>//GEN-END:initComponents
 
     private void up_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_1ActionPerformed
-        // TODO add your handling code here:
+        modifierProposition(0, +1);
     }//GEN-LAST:event_up_chiffre_1ActionPerformed
 
     private void up_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_2ActionPerformed
-        // TODO add your handling code here:
+        modifierProposition(1, +1);
     }//GEN-LAST:event_up_chiffre_2ActionPerformed
 
     private void up_chiffre_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_up_chiffre_3ActionPerformed
-        // TODO add your handling code here:
+        modifierProposition(2, +1);
     }//GEN-LAST:event_up_chiffre_3ActionPerformed
 
+    private void up_chiffre_4ActionPerformed(java.awt.event.ActionEvent evt) { 
+    modifierProposition(3, +1);
+}
+
+  private void down_chiffre_1ActionPerformed(java.awt.event.ActionEvent evt) { 
+    modifierProposition(0, -1);
+}
+
+private void down_chiffre_2ActionPerformed(java.awt.event.ActionEvent evt) { 
+    modifierProposition(1, -1);
+}
+
+private void down_chiffre_3ActionPerformed(java.awt.event.ActionEvent evt) { 
+    modifierProposition(2, -1);
+}
+
+private void down_chiffre_4ActionPerformed(java.awt.event.ActionEvent evt) { 
+    modifierProposition(3, -1);
+}
+
+private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {
+        if (jeu == null) return;
+        // soumet la proposition (clone pour sécurité)
+        jeu.soumettreProposition(propositionActuelle.clone());
+        mettreAJourAffichage();
+
+        if (jeu.estPartieGagnee()) {
+            affichage_resultat.setText("VICTOIRE ! Trouvé en " + jeu.gettentativeActuelle() + " tentatives.");
+        } else if (jeu.estPartieTerminee()) {
+            affichage_resultat.setText("DÉFAITE. Le code secret était : " + jeu.getCodeSecretEnChaine());
+        } else {
+            affichage_resultat.setText("");
+        }
+    }
+
+    private void texte_recommencerActionPerformed(java.awt.event.ActionEvent evt) {
+        if (jeu == null) {
+            jeu = new Cadenas();
+        } else {
+            jeu.genererCodeSecret();
+        }
+        propositionActuelle = new int[]{0, 0, 0, 0};
+        affichage_resultat.setText("");
+        mettreAJourAffichage();
+    }
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -284,6 +385,7 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel affichage_resultat;
     private javax.swing.JButton bouton_tester;
     private javax.swing.JButton down_chiffre_1;
     private javax.swing.JButton down_chiffre_2;
