@@ -18,5 +18,17 @@ public class Cadenas {
     private int nbTropHauts = 0; 
     private int nbTropBas = 0; 
     private boolean partieGagnee = false;
+    
+    public void genererCodeSecret() {
+    tentativeActuelle = 0; 
+    nbExacts = 0;
+    nbTropHauts = 0;
+    nbTropBas = 0;
+    partieGagnee = false;
+    
+    java.util.Random rand = new java.util.Random();
+    for (int i = 0; i < 4; i++) {
+        codeSecret[i] = rand.nextInt(10); 
+    }
    
 }
