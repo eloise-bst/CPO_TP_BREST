@@ -4,6 +4,8 @@
  */
 package miniprojet_cadenas_brest;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author eloisebrest
@@ -14,6 +16,7 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
     
     private Cadenas jeu;
     private int[] propositionActuelle = {0, 0, 0, 0};
+    
 
     public fenêtre_cadenas() {
         initComponents();
@@ -45,7 +48,82 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
         );
 
         bouton_tester.setEnabled(!jeu.estPartieTerminee());
+        mettreAJourHistorique();
+
     }
+    
+    private void mettreAJourHistorique() {
+
+    tentative_1_chiffre1.setText("-");
+    tentative_1_chiffre_2.setText("-");
+    tentative_1_chiffre_3.setText("-");
+    tentative_1_chiffre_4.setText("-");
+
+    tentative_2_chiffre_1.setText("-");
+    tentative_2_chiffre_2.setText("-");
+    tentative_2_chiffre_3.setText("-");
+    tentative_2_chiffre_4.setText("-");
+
+    tentative_3_chiffre_1.setText("-");
+    tentative_3_chiffre_2.setText("-");
+    tentative_3_chiffre_3.setText("-");
+    tentative_3_chiffre_4.setText("-");
+
+    tentative_4_chiffre_1.setText("-");
+    tentative_4_chiffre_2.setText("-");
+    tentative_4_chiffre_3.setText("-");
+    tentative_4_chiffre_4.setText("-");
+
+    tentative_5_chiffre_1.setText("-");
+    tentative_5_chiffre_2.setText("-");
+    tentative_5_chiffre_3.setText("-");
+    tentative_5_chiffre_4.setText("-");
+
+    java.util.ArrayList<String> historique = jeu.getHistoriqueTentatives();
+
+    if (historique.size() >= 1) {
+        String t = historique.get(0);
+        tentative_1_chiffre1.setText("" + t.charAt(0));
+        tentative_1_chiffre_2.setText("" + t.charAt(1));
+        tentative_1_chiffre_3.setText("" + t.charAt(2));
+        tentative_1_chiffre_4.setText("" + t.charAt(3));
+    }
+
+    if (historique.size() >= 2) {
+        String t = historique.get(1);
+        tentative_2_chiffre_1.setText("" + t.charAt(0));
+        tentative_2_chiffre_2.setText("" + t.charAt(1));
+        tentative_2_chiffre_3.setText("" + t.charAt(2));
+        tentative_2_chiffre_4.setText("" + t.charAt(3));
+    }
+
+    if (historique.size() >= 3) {
+        String t = historique.get(2);
+        tentative_3_chiffre_1.setText("" + t.charAt(0));
+        tentative_3_chiffre_2.setText("" + t.charAt(1));
+        tentative_3_chiffre_3.setText("" + t.charAt(2));
+        tentative_3_chiffre_4.setText("" + t.charAt(3));
+    }
+
+    if (historique.size() >= 4) {
+        String t = historique.get(3);
+        tentative_4_chiffre_1.setText("" + t.charAt(0));
+        tentative_4_chiffre_2.setText("" + t.charAt(1));
+        tentative_4_chiffre_3.setText("" + t.charAt(2));
+        tentative_4_chiffre_4.setText("" + t.charAt(3));
+    }
+
+    if (historique.size() >= 5) {
+        String t = historique.get(4);
+        tentative_5_chiffre_1.setText("" + t.charAt(0));
+        tentative_5_chiffre_2.setText("" + t.charAt(1));
+        tentative_5_chiffre_3.setText("" + t.charAt(2));
+        tentative_5_chiffre_4.setText("" + t.charAt(3));
+    }
+}
+
+    
+    
     
     private void changerCouleurCases(java.awt.Color couleur) {
     texte_chiffre_1.setOpaque(true);
@@ -93,6 +171,31 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
         texte_score = new javax.swing.JLabel();
         texte_recommencer = new javax.swing.JButton();
         affichage_resultat = new javax.swing.JLabel();
+        texte_tentative_1 = new javax.swing.JLabel();
+        tentative_1_chiffre1 = new javax.swing.JLabel();
+        tentative_1_chiffre_2 = new javax.swing.JLabel();
+        tentative_1_chiffre_3 = new javax.swing.JLabel();
+        tentative_1_chiffre_4 = new javax.swing.JLabel();
+        texte_tentative_2 = new javax.swing.JLabel();
+        tentative_2_chiffre_1 = new javax.swing.JLabel();
+        tentative_2_chiffre_2 = new javax.swing.JLabel();
+        tentative_2_chiffre_3 = new javax.swing.JLabel();
+        tentative_2_chiffre_4 = new javax.swing.JLabel();
+        texte_tentative_3 = new javax.swing.JLabel();
+        tentative_3_chiffre_1 = new javax.swing.JLabel();
+        tentative_3_chiffre_2 = new javax.swing.JLabel();
+        tentative_3_chiffre_3 = new javax.swing.JLabel();
+        tentative_3_chiffre_4 = new javax.swing.JLabel();
+        texte_tentative_4 = new javax.swing.JLabel();
+        tentative_4_chiffre_1 = new javax.swing.JLabel();
+        tentative_4_chiffre_2 = new javax.swing.JLabel();
+        tentative_4_chiffre_3 = new javax.swing.JLabel();
+        tentative_4_chiffre_4 = new javax.swing.JLabel();
+        texte_tentative_5 = new javax.swing.JLabel();
+        tentative_5_chiffre_1 = new javax.swing.JLabel();
+        tentative_5_chiffre_2 = new javax.swing.JLabel();
+        tentative_5_chiffre_3 = new javax.swing.JLabel();
+        tentative_5_chiffre_4 = new javax.swing.JLabel();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -265,6 +368,81 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
                         getContentPane().add(texte_recommencer, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 360, -1, -1));
                         getContentPane().add(affichage_resultat, new org.netbeans.lib.awtextra.AbsoluteConstraints(121, 334, 290, 20));
 
+                        texte_tentative_1.setText("Tentative 1 :");
+                        getContentPane().add(texte_tentative_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
+
+                        tentative_1_chiffre1.setText("0");
+                        getContentPane().add(tentative_1_chiffre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, -1, -1));
+
+                        tentative_1_chiffre_2.setText("0");
+                        getContentPane().add(tentative_1_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, -1, -1));
+
+                        tentative_1_chiffre_3.setText("0");
+                        getContentPane().add(tentative_1_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, -1, -1));
+
+                        tentative_1_chiffre_4.setText("0");
+                        getContentPane().add(tentative_1_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, -1, -1));
+
+                        texte_tentative_2.setText("Tentative 2 :");
+                        getContentPane().add(texte_tentative_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
+
+                        tentative_2_chiffre_1.setText("0");
+                        getContentPane().add(tentative_2_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, -1, -1));
+
+                        tentative_2_chiffre_2.setText("0");
+                        getContentPane().add(tentative_2_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
+
+                        tentative_2_chiffre_3.setText("0");
+                        getContentPane().add(tentative_2_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, -1, -1));
+
+                        tentative_2_chiffre_4.setText("0");
+                        getContentPane().add(tentative_2_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 100, -1, -1));
+
+                        texte_tentative_3.setText("Tentative 3 :");
+                        getContentPane().add(texte_tentative_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
+
+                        tentative_3_chiffre_1.setText("0");
+                        getContentPane().add(tentative_3_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 120, -1, -1));
+
+                        tentative_3_chiffre_2.setText("0");
+                        getContentPane().add(tentative_3_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, -1, -1));
+
+                        tentative_3_chiffre_3.setText("0");
+                        getContentPane().add(tentative_3_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 120, -1, -1));
+
+                        tentative_3_chiffre_4.setText("0");
+                        getContentPane().add(tentative_3_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, -1, -1));
+
+                        texte_tentative_4.setText("Tentative 4 :");
+                        getContentPane().add(texte_tentative_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, -1, -1));
+
+                        tentative_4_chiffre_1.setText("0");
+                        getContentPane().add(tentative_4_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, -1));
+
+                        tentative_4_chiffre_2.setText("0");
+                        getContentPane().add(tentative_4_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, -1));
+
+                        tentative_4_chiffre_3.setText("0");
+                        getContentPane().add(tentative_4_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 140, -1, -1));
+
+                        tentative_4_chiffre_4.setText("0");
+                        getContentPane().add(tentative_4_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, -1, -1));
+
+                        texte_tentative_5.setText("Tentative 5 :");
+                        getContentPane().add(texte_tentative_5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, -1, -1));
+
+                        tentative_5_chiffre_1.setText("0");
+                        getContentPane().add(tentative_5_chiffre_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 160, -1, -1));
+
+                        tentative_5_chiffre_2.setText("0");
+                        getContentPane().add(tentative_5_chiffre_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, -1, -1));
+
+                        tentative_5_chiffre_3.setText("0");
+                        getContentPane().add(tentative_5_chiffre_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, -1, -1));
+
+                        tentative_5_chiffre_4.setText("0");
+                        getContentPane().add(tentative_5_chiffre_4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 160, -1, -1));
+
                         pack();
                     }// </editor-fold>//GEN-END:initComponents
 
@@ -333,6 +511,7 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
         affichage_resultat.setText("");
         changerCouleurCases(java.awt.Color.WHITE);
         mettreAJourAffichage();
+        mettreAJourHistorique();
         
     }//GEN-LAST:event_texte_recommencerActionPerformed
  
@@ -351,6 +530,26 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
     private javax.swing.JButton down_chiffre_3;
     private javax.swing.JButton down_chiffre_4;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JLabel tentative_1_chiffre1;
+    private javax.swing.JLabel tentative_1_chiffre_2;
+    private javax.swing.JLabel tentative_1_chiffre_3;
+    private javax.swing.JLabel tentative_1_chiffre_4;
+    private javax.swing.JLabel tentative_2_chiffre_1;
+    private javax.swing.JLabel tentative_2_chiffre_2;
+    private javax.swing.JLabel tentative_2_chiffre_3;
+    private javax.swing.JLabel tentative_2_chiffre_4;
+    private javax.swing.JLabel tentative_3_chiffre_1;
+    private javax.swing.JLabel tentative_3_chiffre_2;
+    private javax.swing.JLabel tentative_3_chiffre_3;
+    private javax.swing.JLabel tentative_3_chiffre_4;
+    private javax.swing.JLabel tentative_4_chiffre_1;
+    private javax.swing.JLabel tentative_4_chiffre_2;
+    private javax.swing.JLabel tentative_4_chiffre_3;
+    private javax.swing.JLabel tentative_4_chiffre_4;
+    private javax.swing.JLabel tentative_5_chiffre_1;
+    private javax.swing.JLabel tentative_5_chiffre_2;
+    private javax.swing.JLabel tentative_5_chiffre_3;
+    private javax.swing.JLabel tentative_5_chiffre_4;
     private javax.swing.JLabel texte_chiffre_1;
     private javax.swing.JLabel texte_chiffre_2;
     private javax.swing.JLabel texte_chiffre_3;
@@ -365,6 +564,11 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
     private javax.swing.JButton texte_recommencer;
     private javax.swing.JLabel texte_score;
     private javax.swing.JLabel texte_tentative;
+    private javax.swing.JLabel texte_tentative_1;
+    private javax.swing.JLabel texte_tentative_2;
+    private javax.swing.JLabel texte_tentative_3;
+    private javax.swing.JLabel texte_tentative_4;
+    private javax.swing.JLabel texte_tentative_5;
     private javax.swing.JButton up_chiffre_1;
     private javax.swing.JButton up_chiffre_2;
     private javax.swing.JButton up_chiffre_3;
