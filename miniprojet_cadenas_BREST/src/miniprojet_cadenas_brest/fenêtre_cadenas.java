@@ -46,6 +46,18 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
 
         bouton_tester.setEnabled(!jeu.estPartieTerminee());
     }
+    
+    private void changerCouleurCases(java.awt.Color couleur) {
+    texte_chiffre_1.setOpaque(true);
+    texte_chiffre_2.setOpaque(true);
+    texte_chiffre_3.setOpaque(true);
+    texte_chiffre_4.setOpaque(true);
+
+    texte_chiffre_1.setBackground(couleur);
+    texte_chiffre_2.setBackground(couleur);
+    texte_chiffre_3.setBackground(couleur);
+    texte_chiffre_4.setBackground(couleur);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -290,16 +302,25 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
 
     private void bouton_testerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_testerActionPerformed
         if (jeu == null) return;
-        jeu.soumettreProposition(propositionActuelle.clone());
-        mettreAJourAffichage();
 
-        if (jeu.estPartieGagnee()) {
-            affichage_resultat.setText("VICTOIRE ! Trouvé en " + jeu.gettentativeActuelle() + " tentatives.");
-        } else if (jeu.estPartieTerminee()) {
-            affichage_resultat.setText("DÉFAITE. Le code secret était : " + jeu.getCodeSecretEnChaine());
-        } else {
-            affichage_resultat.setText("");
-        }
+    jeu.soumettreProposition(propositionActuelle.clone());
+    mettreAJourAffichage();
+
+    if (jeu.estPartieGagnee()) {
+        affichage_resultat.setText(
+            "VICTOIRE ! Trouvé en " + jeu.gettentativeActuelle() + " tentatives."
+        );
+        changerCouleurCases(java.awt.Color.GREEN);
+
+    } else if (jeu.estPartieTerminee()) {
+        affichage_resultat.setText(
+            "DEFAITE. Le code secret était : " + jeu.getCodeSecretEnChaine()
+        );
+        changerCouleurCases(java.awt.Color.RED);
+
+    } else {
+        affichage_resultat.setText("");
+    }
     }//GEN-LAST:event_bouton_testerActionPerformed
 
     private void texte_recommencerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_texte_recommencerActionPerformed
@@ -310,7 +331,9 @@ public class fenêtre_cadenas extends javax.swing.JFrame {
         }
         propositionActuelle = new int[]{0, 0, 0, 0};
         affichage_resultat.setText("");
+        changerCouleurCases(java.awt.Color.WHITE);
         mettreAJourAffichage();
+        
     }//GEN-LAST:event_texte_recommencerActionPerformed
  
     /**
